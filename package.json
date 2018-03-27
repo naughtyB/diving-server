@@ -1,0 +1,11 @@
+{
+  "name": "diving",
+  "version": "0.1.0",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "js-cookie": "^2.2.0",
+    "moment": "^2.21.0",
+    "mongoose": "^4.11.9"
+  }
+}
