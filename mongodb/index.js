@@ -19,7 +19,7 @@ let Schema=mongoose.Schema;
 
 
 let HomepageSchema = new Schema({
-  banner: [{type: String}]
+  banner: [{url: String, link: String}]
 })
 
 let Homepage = mongoose.model("homepage", HomepageSchema);
@@ -138,6 +138,13 @@ let ManagerSchema = new Schema({
 
 let Manager = mongoose.model("manager", ManagerSchema);
 
+let CourseSchema = new Schema({
+  name: String,
+  detail: String
+})
+
+let Course = mongoose.model("course", CourseSchema);
+
 let AbSchema = new Schema({
   data: [{music: [{name: String}]}]
 })
@@ -155,5 +162,6 @@ module.exports={
   TripOrder,
   Equipment,
   EquipmentOrder,
-  Manager
+  Manager,
+  Course
 };

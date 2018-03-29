@@ -1,3 +1,4 @@
+
 const express = require("express");
 let app = express();
 const http = require("http");
@@ -5,9 +6,11 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const fs = require("fs");
 const cookie = require("cookie-parser");
+let multer  = require('multer');
 
 let urlencodeParser = bodyParser.urlencoded({extends:false});
 let jsonParser = bodyParser.json({extends:false});
+let upload =  multer({ dest: './public/upload/' });
 
 app.use(express.static(__dirname));
 
@@ -91,6 +94,41 @@ app.use('/server/equipment/createOrder', jsonParser, require('./router/createEqu
 //获取装备详细资料
 app.use('/server/equipment/getEquipmentDetailData', urlencodeParser, require('./router/getEquipmentDetailData'));
 
-app.use('/aa', urlencodeParser, require('./router/aa'))
+//管理员登陆
+app.use('/server/manager/login', urlencodeParser, require('./router/managerLogin'));
+
+//管理员注册
+app.use('/server/manager/register', urlencodeParser, require('./router/managerRegister'))
+
+//管理员重置密码
+app.use('/server/manager/resetPassword', urlencodeParser, require('./router/managerResetPassword'));
+
+//管理员自动登录
+app.use('/server/manager/autoLogin', urlencodeParser, require('./router/managerAutoLogin'))
+
+//管理员创建课程
+app.use('/server/course/createCourse', urlencodeParser, require('./router/createCourse'));
+
+//获取课程资料
+app.use('/server/course/getCourseData', urlencodeParser, require('./router/getCourseData'))
+
+//获取课程详细资料
+app.use('/server/course/getCourseDetailData', urlencodeParser, require('./router/getCourseDetailData'));
+
+//管理员修改课程详细资料
+app.use('/server/course/modifyCourse', urlencodeParser, require('./router/modifyCourse'))
+
+//管理员删除课程
+app.use('/server/course/deleteCourse', urlencodeParser, require('./router/deleteCourse'))
+
+// app.use('/bb', urlencodeParser, require('./router/bb'))
+//上传文件
+app.use('/upload', upload.single('file'), require('./router/upload'));
+
+//上传首页banner
+app.use('/uploadHomepage', upload.single('file'), require('./router/uploadHomepage'));
+
+//给banner添加链接
+app.use('/homepage/addBannerLink', urlencodeParser, require('./router/addBannerLink'));
 
 http.createServer(app).listen(8000);
