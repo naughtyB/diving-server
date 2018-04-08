@@ -129,6 +129,13 @@ app.use('/upload', upload.single('file'), require('./router/upload'));
 app.use('/uploadHomepage', upload.single('file'), require('./router/uploadHomepage'));
 
 //给banner添加链接
-app.use('/homepage/addBannerLink', urlencodeParser, require('./router/addBannerLink'));
+app.use('/server/homepage/addBannerLink', urlencodeParser, require('./router/addBannerLink'));
+
+//删除banner
+app.use('/server/homepage/deleteHomepageBanner', urlencodeParser, require('./router/deleteHomepageBanner'))
+
+//管理员创建课程
+app.use('/server/practice/createPractice', jsonParser, require('./router/createPractice'));
+
 
 http.createServer(app).listen(8000);
